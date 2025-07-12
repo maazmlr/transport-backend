@@ -5,10 +5,11 @@ import cors from "cors";
 import router from "./routes/index.js";
 const app = express();
 const port = 3000;
+import db2 from "./src/db.js";
 // Run migrations on server start
 (async () => {
   try {
-    await db.migrate.latest();
+    await db2.migrate.latest();
     console.log("✅ Migrations are up to date.");
   } catch (err) {
     console.error("❌ Failed to run migrations:", err);
