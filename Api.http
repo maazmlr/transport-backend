@@ -1,0 +1,101 @@
+@baseUrl = http://localhost:3000/api
+
+
+###
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "phone":"03302619144",
+  "password":"openplz123",
+  "role":"driver"
+}
+###
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "phone":"03302619134",
+  "password":"openplz123",
+  "role":"user"
+}
+
+###
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "phone":"03302619144",
+  "password":"openplz123"
+}
+
+###
+
+PUT {{baseUrl}}/user/profile
+Content-Type: application/json
+Authorization: 
+
+{ 
+  "id":"088afd7e-2ffa-4a37-852f-10fde9035620",
+  "email": "user@example.com",
+  "img_url": "http://image.url/profile.png",
+  "location": "Karachi, Pakistan",
+  "full_name": "Maaz Abdul Jabbar"
+}
+
+
+###
+PUT {{baseUrl}}/user/profile
+Content-Type: application/json
+Authorization:
+
+{
+  "id": "975c44c3-5d01-48b0-a1c7-7487b64e3688",
+  "email": "driver@example.com",
+  "img_url": "http://image.url/profile.png",
+  "location": "Karachi, Pakistan",
+  "full_name": "Maaz Abdul Jabbar",
+  "vehicle_info_url": "http://image.url/vehicle.png",
+  "vehicle_number": "ABC-1234",
+  "vehicle_model": "Toyota Corolla 2022",
+  "license_url": "http://image.url/license.png",
+  "license_number": "DL-987654321",
+  "license_valid": "2026-12-31",
+  "vehicleType": "car",              
+  "vehicleLimit": 4                  
+}
+
+
+
+
+###
+POST {{baseUrl}}/rides/register-ride
+Content-Type: application/json
+Authorization:
+
+
+{
+  "userId": "088afd7e-2ffa-4a37-852f-10fde9035620",       
+  "pickup": "Gulshan, Karachi",
+  "destination": "DHA, Karachi",
+  "price": 1500,
+  "rideDatetime": "2025-07-01T14:00:00Z",
+  "durationDays": 1,
+  "requiredVehicleType": "car"                                     
+}
+
+###
+GET {{baseUrl}}/rides/get-rides-driver/975c44c3-5d01-48b0-a1c7-7487b64e3688
+
+
+###
+POST  {{baseUrl}}/rides/acceptRide
+Content-Type: application/json
+Authorization:
+
+{
+  "driverId": "975c44c3-5d01-48b0-a1c7-7487b64e3688",
+  "rideId": "6158e0ae-3482-4573-9844-ca58ae8fc540"
+}
+
+d
