@@ -36,10 +36,14 @@ Content-Type: application/json
 Authorization: 
 
 { 
-  "id":"088afd7e-2ffa-4a37-852f-10fde9035620",
+  "id":"f9805f4e-685c-4922-b8d6-843f00831c2f",
   "email": "user@example.com",
   "img_url": "http://image.url/profile.png",
-  "location": "Karachi, Pakistan",
+  "location": {
+    "address": "Gulshan, Karachi",
+    "latitude": 24.8607,
+    "longitude": 67.0011
+  },
   "full_name": "Maaz Abdul Jabbar"
 }
 
