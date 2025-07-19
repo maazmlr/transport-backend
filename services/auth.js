@@ -51,4 +51,24 @@ export const AuthServices = {
       throw error;
     }
   },
+
+  async updatePassword({ userId, oldPassword, newPassword }) {
+    try {
+      const user = await db("users").where({ id: userId }).first();
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      if (user.password !== oldPassword) {
+        throw new Error("Old password is incorrect");
+      }
+
+      await db("users").where({ id: userId }).update({ password: newPassword });
+
+      return { message: "Password updated successfully" };
+    } catch (error) {
+      console.error("Error in AuthService.updatePassword:", error);
+      throw error;
+    }
+  },
 };

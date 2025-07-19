@@ -29,6 +29,16 @@ Content-Type: application/json
   "password":"openplz123"
 }
 
+
+###
+POST {{baseUrl}}/auth/update-password
+Content-Type: application/json  
+
+{
+  "userId":"f9805f4e-685c-4922-b8d6-843f00831c2f",
+  "oldPassword":"openplz123", 
+  "newPassword":"newpassword123"
+}
 ###
 
 PUT {{baseUrl}}/user/profile

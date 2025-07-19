@@ -43,3 +43,23 @@ export const loginController = async (req, res) => {
     });
   }
 };
+
+export const updatePasswordController = async (req, res) => {
+  try {
+    const { userId, oldPassword, newPassword } = req.body;
+
+    if (!userId || !oldPassword || !newPassword) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const result = await AuthServices.updatePassword({
+      userId,
+      oldPassword,
+      newPassword,
+    });
+
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
