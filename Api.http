@@ -90,7 +90,9 @@ Authorization:
 
 ###
 GET {{baseUrl}}/rides/get-rides-driver/975c44c3-5d01-48b0-a1c7-7487b64e3688
+###
 
+GET {{baseUrl}}/rides/get-ride/975c44c3-5d01-48b0-a1c7-7487b64e3688
 
 ###
 POST  {{baseUrl}}/rides/acceptRide
