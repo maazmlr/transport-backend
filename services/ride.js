@@ -13,6 +13,10 @@ export const RideService = {
     return await RideModel.findByUser(userId);
   },
 
+  async getDriverRides(driver_id) {
+    return await RideModel.findByDriver(driver_id);
+  },
+
   async changeRideStatus(rideId, newStatus) {
     return await RideModel.updateStatus(rideId, newStatus);
   },

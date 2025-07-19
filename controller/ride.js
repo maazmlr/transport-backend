@@ -97,13 +97,40 @@ export const acceptRideController = async (req, res) => {
 
 export const getRidesByUserController = async (req, res) => {
   try {
+    const { userId, role } = req.params;
+
+    if (!userId) {
+      return res.status(400).json({ message: "userId is required" });
+    }
+    const user = await db("users").where({ id: userId }).first();
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    let rides;
+    if (user?.role === "user") rides = await RideService.getUserRides(userId);
+    if (user?.role === "driver")
+      rides = await RideService.getDriverRides(userId);
+
+    return res.status(200).json({
+      message: "Rides fetched successfully",
+      rides,
+    });
+  } catch (error) {
+    console.error("getRidesByUserController error:", error);
+    return res.status(500).json({ message: "Failed to fetch rides" });
+  }
+};
+
+export const getRidesByDriverController = async (req, res) => {
+  try {
     const { userId } = req.params;
 
     if (!userId) {
       return res.status(400).json({ message: "userId is required" });
     }
 
-    const rides = await RideService.getUserRides(userId);
+    const rides = await RideService.getDriverRides(userId);
 
     return res.status(200).json({
       message: "Rides fetched successfully",

@@ -55,6 +55,12 @@ export const RideModel = {
     return db("rides").where({ user_id: userId }).orderBy("created_at", "desc");
   },
 
+  async findByDriver(driverId) {
+    return db("rides")
+      .where({ driver_id: driverId })
+      .orderBy("created_at", "desc");
+  },
+
   // Update ride status
   async updateStatus(rideId, status) {
     return db("rides")
