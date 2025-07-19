@@ -103,7 +103,7 @@ export const getRidesByUserController = async (req, res) => {
       return res.status(400).json({ message: "userId is required" });
     }
 
-    const rides = await RideService.findByUser(userId);
+    const rides = await RideService.getUserRides(userId);
 
     return res.status(200).json({
       message: "Rides fetched successfully",
