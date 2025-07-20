@@ -1,4 +1,5 @@
 import { RideService } from "../services/ride.js";
+import db from "../src/db.js";
 
 export const createRideController = async (req, res) => {
   try {
