@@ -139,3 +139,17 @@ Authorization:
 }
 
 
+###
+POST   {{baseUrl}}/notification/send
+Content-Type: application/json
+Authorization:
+
+{
+  "title": "cancelled",
+  "message": "Your ride has been cancelled.",
+  "user_id": "ca028619-4e7a-4211-8428-12038c414552"  
+
+}
+
+
+
