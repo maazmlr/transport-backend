@@ -142,3 +142,39 @@ export const getRidesByDriverController = async (req, res) => {
     return res.status(500).json({ message: "Failed to fetch rides" });
   }
 };
+
+// controllers/rideController.js
+
+export const changeRideStatusController = async (req, res) => {
+  try {
+    const { rideId } = req.params;
+    const { newStatus } = req.body;
+    console.log(newStatus, "ksksk");
+
+    if (!rideId || !newStatus) {
+      return res
+        .status(400)
+        .json({ message: "rideId and newStatus are required" });
+    }
+
+    const allowed = ["pending", "accepted", "completed", "cancelled"];
+    if (!allowed.includes(newStatus.trim())) {
+      return res
+        .status(400)
+        .json({ message: `Invalid status. Allowed: ${allowed.join(", ")}` });
+    }
+
+    const updatedRide = await RideService.changeRideStatus(
+      rideId,
+      newStatus.trim()
+    );
+
+    return res.status(200).json({
+      message: "Ride status updated successfully",
+      ride: updatedRide,
+    });
+  } catch (error) {
+    console.error("changeRideStatusController error:", error);
+    return res.status(500).json({ message: "Failed to update ride status" });
+  }
+};
