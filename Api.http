@@ -110,10 +110,10 @@ Authorization:
 }
 
 ###
-GET {{baseUrl}}/rides/get-rides-driver/975c44c3-5d01-48b0-a1c7-7487b64e3688
+GET {{baseUrl}}/rides/get-rides-driver/0492cd4c-b2bf-40be-9af4-5cccb418e971
 ###
 
-GET {{baseUrl}}/rides/get-ride/975c44c3-5d01-48b0-a1c7-7487b64e3688
+GET {{baseUrl}}/rides/get-ride/ca028619-4e7a-4211-8428-12038c414552
 
 ###
 POST  {{baseUrl}}/rides/acceptRide

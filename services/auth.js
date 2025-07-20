@@ -1,4 +1,5 @@
 import { getUserByPhone, createUser } from "../models/user.js";
+import db from "../src/db.js";
 
 export const AuthServices = {
   async register({ phone, password, role = "rider" }) {
