@@ -52,15 +52,20 @@ export const RideModel = {
 
   // Get all rides by user
   async findByUser(userId) {
-    return db("rides").where({ user_id: userId }).orderBy("created_at", "desc");
+    return db("rides")
+      .leftJoin("users as drivers", "rides.driver_id", "drivers.id")
+      .select("rides.*", "drivers.phone_number as phone")
+      .where("rides.user_id", userId)
+      .orderBy("rides.created_at", "desc");
   },
 
   async findByDriver(driverId) {
     return db("rides")
-      .where({ driver_id: driverId })
-      .orderBy("created_at", "desc");
+      .leftJoin("users", "rides.user_id", "users.id")
+      .select("rides.*", "users.phone_number as phone")
+      .where("rides.driver_id", driverId)
+      .orderBy("rides.created_at", "desc");
   },
-
   // Update ride status
   async updateStatus(rideId, status) {
     return db("rides")
