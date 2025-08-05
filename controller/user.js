@@ -14,8 +14,8 @@ export const updateProfileController = async (req, res) => {
       license_url,
       license_number,
       license_valid,
-      vehicleType,       // ✅ NEW
-      vehicleLimit       // ✅ NEW
+      vehicleType, // ✅ NEW
+      vehicleLimit, // ✅ NEW
     } = req.body;
 
     if (!id) {
@@ -33,8 +33,8 @@ export const updateProfileController = async (req, res) => {
       license_url,
       license_number,
       license_valid,
-      vehicleType,       // ✅ Pass to service
-      vehicleLimit       // ✅ Pass to service
+      vehicleType, // ✅ Pass to service
+      vehicleLimit, // ✅ Pass to service
     });
 
     if (!updatedUser) {
@@ -47,6 +47,10 @@ export const updateProfileController = async (req, res) => {
     });
   } catch (error) {
     console.error("Error in updateProfileController:", error);
+
+    if (error.message === "Email already registered.") {
+      return res.status(409).json({ message: "Email already registered" });
+    }
     return res.status(500).json({ message: "Failed to update profile" });
   }
 };

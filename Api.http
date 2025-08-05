@@ -1,5 +1,5 @@
-# @baseUrl = https://transport-backend-7twe.onrender.com/api
-@baseUrl = http://localhost:3000/api
+@baseUrl = https://transport-backend-7twe.onrender.com/api
+# @baseUrl = http://localhost:3000/api
 
 @driverId = 0492cd4c-b2bf-40be-9af4-5cccb418e971
 @userId = ca028619-4e7a-4211-8428-12038c414552
@@ -28,7 +28,7 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "phone":"03302619134",
+  "phone":"03302619144",
   "password":"openplz123"
 }
  
@@ -82,7 +82,7 @@ Authorization:
   "license_url": "http://image.url/license.png",
   "license_number": "DL-987654321",
   "license_valid": "2026-12-31",
-  "vehicleType": "car",              
+  "vehicleType": "bike",              
   "vehicleLimit": 4                  
 }
 

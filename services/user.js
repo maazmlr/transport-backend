@@ -14,13 +14,24 @@ export const UserServices = {
       license_url,
       license_number,
       license_valid,
-      vehicleType,       // ✅ NEW
-      vehicleLimit       // ✅ NEW
+      vehicleType, // ✅ NEW
+      vehicleLimit, // ✅ NEW
     }
   ) {
     try {
+      const existingUser = await db("users")
+        .where({ email })
+        .andWhereNot({ id: userId }) // make sure it's not the same user
+        .first();
+
+      if (existingUser) {
+        throw new Error("Email already registered.");
+      }
       // 1. Get user role from DB
-      const user = await db("users").select("role").where({ id: userId }).first();
+      const user = await db("users")
+        .select("role")
+        .where({ id: userId })
+        .first();
 
       const updateData = {
         email,
@@ -39,8 +50,8 @@ export const UserServices = {
           license_url,
           license_number,
           license_valid,
-          vehicleType,     // ✅ add vehicleType
-          vehicleLimit,    // ✅ add vehicleLimit
+          vehicleType, // ✅ add vehicleType
+          vehicleLimit, // ✅ add vehicleLimit
         });
       }
 
@@ -60,8 +71,8 @@ export const UserServices = {
           "license_url",
           "license_number",
           "license_valid",
-          "vehicleType",     // ✅ return these fields
-          "vehicleLimit",    // ✅ return these fields
+          "vehicleType", // ✅ return these fields
+          "vehicleLimit", // ✅ return these fields
           "created_at",
           "updated_at",
         ]);
