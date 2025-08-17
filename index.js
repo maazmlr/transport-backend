@@ -4,7 +4,7 @@ import db from "./knexfile.js"; // adjust path if needed
 import cors from "cors";
 import router from "./routes/index.js";
 const app = express();
-const port = 3000;
+const port = 4000;
 import db2 from "./src/db.js";
 // Run migrations on server start
 (async () => {
