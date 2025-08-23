@@ -3,47 +3,51 @@ import db from "../src/db.js";
 
 export const RideModel = {
   // Create new ride
-  async create({
-    userId,
-    pickup,
-    destination,
-    price,
-    status = "pending",
-    rideDatetime,
-    durationDays,
-    requiredVehicleType,
-  }) {
-    try {
-      const [ride] = await db("rides")
-        .insert({
-          user_id: userId,
-          pickup,
-          destination,
-          price,
-          status,
-          ride_datetime: rideDatetime,
-          duration_days: durationDays,
-          required_vehicle_type: requiredVehicleType,
-        })
-        .returning([
-          "id",
-          "user_id",
-          "pickup",
-          "destination",
-          "price",
-          "ride_datetime",
-          "duration_days",
-          "required_vehicle_type",
-          "status",
-          "created_at",
-        ]);
+async create({
+  userId,
+  pickup,
+  destination,
+  price,
+  status = "pending",
+  rideDatetime,
+  durationDays,
+  requiredVehicleType,
+  time, // add time here
+}) {
+  try {
+    const [ride] = await db("rides")
+      .insert({
+        user_id: userId,
+        pickup,
+        destination,
+        price,
+        status,
+        ride_datetime: rideDatetime,
+        duration_days: durationDays,
+        required_vehicle_type: requiredVehicleType,
+        time, // insert time
+      })
+      .returning([
+        "id",
+        "user_id",
+        "pickup",
+        "destination",
+        "price",
+        "ride_datetime",
+        "duration_days",
+        "required_vehicle_type",
+        "time", // return time
+        "status",
+        "created_at",
+      ]);
 
-      return ride;
-    } catch (error) {
-      console.error("RideModel.create error:", error);
-      throw error;
-    }
-  },
+    return ride;
+  } catch (error) {
+    console.error("RideModel.create error:", error);
+    throw error;
+  }
+},
+
 
   // Get ride by ID
   async findById(rideId) {

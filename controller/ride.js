@@ -12,6 +12,7 @@ export const createRideController = async (req, res) => {
       rideDatetime,
       durationDays,
       requiredVehicleType,
+      time, // add time
     } = req.body;
 
     // Validate required fields
@@ -22,7 +23,8 @@ export const createRideController = async (req, res) => {
       price == null ||
       !rideDatetime ||
       !durationDays ||
-      !requiredVehicleType
+      !requiredVehicleType ||
+      !time // validate time
     ) {
       return res.status(400).json({ message: "Missing required fields" });
     }
@@ -36,6 +38,7 @@ export const createRideController = async (req, res) => {
       rideDatetime,
       durationDays,
       requiredVehicleType,
+      time, // pass time
     });
 
     res.status(201).json({ message: "Ride created", ride });
@@ -44,6 +47,7 @@ export const createRideController = async (req, res) => {
     res.status(500).json({ message: "Failed to create ride" });
   }
 };
+
 
 // controllers/rideController.js
 
