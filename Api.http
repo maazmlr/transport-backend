@@ -4,7 +4,7 @@
 @driverId = bd8da6be-d44f-4420-8b73-ce16be048c7e
 @userId = 0920dac7-366f-4c81-a8c2-56d478d42fbc
 @ticketId = 1
-
+@rideId=253e4903-3fef-417b-ada5-442adff0acd3
 
 ###
 POST {{baseUrl}}/auth/register
@@ -112,14 +112,15 @@ Authorization:
   "price": 1500,
   "rideDatetime": "2025-07-01T14:00:00Z",
   "durationDays": 1,
-  "requiredVehicleType": "car"                                     
+  "requiredVehicleType": "bike"  ,
+  "time": "14:00:00"
 }
 
 ###
-GET {{baseUrl}}/rides/get-rides-driver/{{userId}}
+GET {{baseUrl}}/rides/get-rides-driver/{{driverId}}
 ###
 
-GET {{baseUrl}}/rides/get-ride/0492cd4c-b2bf-40be-9af4-5cccb418e971
+GET {{baseUrl}}/rides/get-ride/{{userId}}
 
 ###
 POST  {{baseUrl}}/rides/acceptRide
@@ -128,17 +129,31 @@ Authorization:
 
 {
   "driverId": "{{driverId}}",
-  "rideId": "c69aa3bf-62ee-46de-928f-353a8a7fde73"
+  "rideId": "{{rideId}}"
 }
 
 ###
-PUT  {{baseUrl}}/rides/status/c69aa3bf-62ee-46de-928f-353a8a7fde73
+PUT  {{baseUrl}}/rides/status/{{rideId}}
 Content-Type: application/json
 Authorization:
 
 {
-  "newStatus": "cancelled "
+  "newStatus": "completed "
 }
+
+
+###
+POST  {{baseUrl}}/reviews
+Content-Type: application/json  
+Authorization:
+
+{
+  "userId": "{{userId}}",
+  "rideId": "{{rideId}}",
+  "rating": 5,
+  "comment": "Smooth ride and professional driver"
+}
+
 
 
 ###
