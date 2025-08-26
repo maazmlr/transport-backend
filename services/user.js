@@ -83,4 +83,30 @@ export const UserServices = {
       throw error;
     }
   },
+
+
+
+ async  getDashboardStats() {
+  const [riders, pending, active, resolved] = await Promise.all([
+    db("users").where({ role: "driver" }).count("id as count").first(),
+    db("users")
+      .where({ role: "driver", driver_verification_status: "pending" })
+      .count("id as count")
+      .first(),
+    db("tickets").where({ status: "open" }).count("id as count").first(),
+    db("tickets")
+      .where({ status: "closed" })
+      .andWhereRaw("DATE(updated_at) = CURRENT_DATE")
+      .count("id as count")
+      .first(),
+  ]);
+
+  return {
+    totalRiders: parseInt(riders.count, 10),
+    pendingVerifications: parseInt(pending.count, 10),
+    activeTickets: parseInt(active.count, 10),
+    resolvedToday: parseInt(resolved.count, 10),
+  };
+}
+
 };

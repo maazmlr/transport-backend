@@ -91,7 +91,7 @@ Authorization:
 ###
 GET {{baseUrl}}/user/drivers
 ###
-GET {{baseUrl}}/user/user/{{userId}}
+GET {{baseUrl}}/user/user/{{driverId}}
 ###
 PUT {{baseUrl}}/user/driver/verify/{{driverId}}
 Content-Type: application/json  
@@ -99,6 +99,8 @@ Content-Type: application/json
 {
   "status": "verified"
 }
+###
+GET {{baseUrl}}/user/data
 
 
 
