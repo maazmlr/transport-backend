@@ -11,6 +11,8 @@ module.exports = {
     });
   },
 
+  
+
   down: async function (knex) {
     await knex.schema.alterTable("users", (table) => {
       table.dropColumn("driver_verification_status");
