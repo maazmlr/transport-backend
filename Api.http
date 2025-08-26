@@ -1,17 +1,17 @@
 # @baseUrl = https://transport-backend-7twe.onrender.com/api
 @baseUrl = http://localhost:4000/api
 
-@driverId = bd8da6be-d44f-4420-8b73-ce16be048c7e
+@driverId = 314226f9-ebb8-46ed-90ae-7c481d2f0c72
 @userId = 0920dac7-366f-4c81-a8c2-56d478d42fbc
-@ticketId = 1
-@rideId=253e4903-3fef-417b-ada5-442adff0acd3
+@ticketId = 4
+@rideId=4817816e-dd03-43a5-8c72-3b1d2d8f8e11
 
 ###
 POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-  "phone":"03302619144",
+  "phone":"03302319144",
   "password":"openplz123",
   "role":"driver"
 }
@@ -30,7 +30,7 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "phone":"03302619134",
+  "phone":"03302319144",
   "password":"openplz123"
 }
  
@@ -70,7 +70,7 @@ Authorization:
 
 {
   "id": "{{driverId}}",
-  "email": "driver@example.com",
+  "email": "maaz@example.com",
   "img_url": "http://image.url/profile.png",
   "location": {
     "address": "Gulshan, Karachi",
@@ -88,6 +88,17 @@ Authorization:
   "vehicleLimit": 4                  
 }
 
+###
+GET {{baseUrl}}/user/drivers
+###
+GET {{baseUrl}}/user/user/{{userId}}
+###
+PUT {{baseUrl}}/user/driver/verify/{{driverId}}
+Content-Type: application/json  
+
+{
+  "status": "verified"
+}
 
 
 
@@ -100,19 +111,19 @@ Authorization:
 {
   "userId": "{{userId}}",       
   "pickup": {
-    "address": "Gulshan, Karachi",
+    "address": "huddinmsmsm, Karachi",
     "latitude": 24.8607,
     "longitude": 67.0011
   },
   "destination": {
-    "address": "Clifton, Karachi",
+    "address": "saddr, Karachi",
     "latitude": 24.8046,
     "longitude": 67.0369
   },
   "price": 1500,
   "rideDatetime": "2025-07-01T14:00:00Z",
   "durationDays": 1,
-  "requiredVehicleType": "bike"  ,
+  "requiredVehicleType": "car"  ,
   "time": "14:00:00"
 }
 
@@ -140,8 +151,10 @@ Authorization:
 {
   "newStatus": "completed "
 }
-
-
+###
+GET {{baseUrl}}/rides/all-rides
+###
+GET {{baseUrl}}/rides/rideById/{{rideId}}
 ###
 POST  {{baseUrl}}/reviews
 Content-Type: application/json  
@@ -151,7 +164,7 @@ Authorization:
   "userId": "{{userId}}",
   "rideId": "{{rideId}}",
   "rating": 5,
-  "comment": "Smooth ride and professional driver"
+  "comment": "Smooth ride and professional dr253e4903-3fef-417b-ada5-442adff0acd3iver"
 }
 
 
@@ -192,7 +205,7 @@ Content-Type: application/json
 
 
 ### Get Ticket by ID
-GET {{baseUrl}}/tickets/{{ticketId}}
+GET {{baseUrl}}/tickets/4
 Content-Type: application/json
 
 

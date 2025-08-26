@@ -25,5 +25,9 @@ export const RideService = {
     return RideModel.findRidesForDriver(driverId);
   },
 
+  async getAllRides() {
+    return await RideModel.getAllRides();
+  },
+
   assignDriverToRide: RideModel.assignDriverToRide,
 };

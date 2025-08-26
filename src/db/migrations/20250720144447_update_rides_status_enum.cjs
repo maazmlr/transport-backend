@@ -33,6 +33,6 @@ exports.down = async function (knex) {
   await knex.raw(`
     ALTER TABLE rides
     ADD CONSTRAINT rides_status_check
-    CHECK (status IN ('pending', 'accepted', 'completed'))
+    CHECK (status IN ('cancelled','pending', 'accepted', 'completed'))
   `);
 };

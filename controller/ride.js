@@ -182,3 +182,30 @@ export const changeRideStatusController = async (req, res) => {
     return res.status(500).json({ message: "Failed to update ride status" });
   }
 };
+
+
+export const getAllRidesController = async (req, res) => {
+  try {
+    const rides = await RideService.getAllRides();
+    res.status(200).json( rides );
+  } catch (err) {
+    console.error("getAllRidesController error:", err);
+    res.status(500).json({ message: "Failed to fetch rides" });
+  }
+};
+
+export const getRideController = async (req, res) => {
+  try {
+    const { rideId } = req.params;
+    const ride = await RideService.getRide(rideId);
+
+    if (!ride) {
+      return res.status(404).json({ message: "Ride not found" });
+    }
+
+    res.status(200).json(ride);
+  } catch (error) {
+    console.error("getRideController error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

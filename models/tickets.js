@@ -9,9 +9,18 @@ export const createTicket = (ticket) =>
 
 // Get a single ticket by ID (with user info if needed)
 export const getTicketById = (id) =>
-  db("tickets")
-    .where({ id })
+  db("tickets as t")
+    .join("users as u", "t.user_id", "u.id")
+    .where("t.id", id)
+    .select(
+      "t.*",
+      "u.id as user_id",
+      "u.full_name as user_name",
+      "u.email as user_email",
+      "u.phone_number as user_phone"
+    )
     .first();
+
 
 // Get all tickets (optionally with user info)
 export const getAllTickets = () =>

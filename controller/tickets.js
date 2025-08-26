@@ -2,8 +2,8 @@
 import * as TicketService from "../services/tickets.js";
 
 export const createTicket = async (req, res) => {
-  const { title, description, priority } = req.body;
-  const ticket = await TicketService.createTicket(title, description, priority);
+  const { title, description, priority,userId } = req.body;
+  const ticket = await TicketService.createTicket(title, description, priority,userId);
   res.json(ticket);
 };
 

@@ -50,9 +50,23 @@ async create({
 
 
   // Get ride by ID
-  async findById(rideId) {
-    return db("rides").where({ id: rideId }).first();
-  },
+async findById(rideId) {
+  return db("rides as r")
+    .leftJoin("users as u", "r.user_id", "u.id")       // rider info
+    .leftJoin("users as d", "r.driver_id", "d.id")     // driver info
+    .where("r.id", rideId)
+    .first()
+    .select(
+      "r.*",
+      "u.id as user_id",
+      "u.full_name as user_name",
+
+      "u.phone_number as user_phone",
+      "u.email as user_email",
+      "d.*"
+    );
+}
+,
 
   // Get all rides by user
   async findByUser(userId) {
@@ -116,4 +130,18 @@ async create({
 
     return ride;
   },
-};
+
+ async getAllRides() {
+  return db("rides as r")
+    .leftJoin("users as d", "r.driver_id", "d.id") // join driver info if exists
+    .whereNotIn("r.status", ["cancelled", "completed"])
+    .orderBy("r.created_at", "desc")
+    .select(
+      "r.*",
+      "d.id as driver_id",
+      "d.full_name as driver_name",
+      "d.email as driver_email",
+      "d.phone_number as driver_phone"
+    );
+}
+}
