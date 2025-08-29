@@ -252,3 +252,11 @@ GET {{baseUrl}}/tickets/{{ticketId}}/messages
 
 
 
+###
+POST {{baseUrl}}/messages/chatbot
+Content-Type: application/json
+
+{
+  "role": "user",
+  "userMessage": "Hello, I need help with my recent ride booking. answer me in 100 words"
+}

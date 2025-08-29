@@ -5,6 +5,8 @@ import RidesRoute from "./rides.js";
 import NotificationRoutes from "./notifcation.js";
 import TicketsRoutes from "./tickets.js";
 import ReviewRoutes from "./review.js";
+import MessageRoutes from "./messages.js";
+
 
 
 const router = express.Router();
@@ -15,6 +17,8 @@ router.use("/rides", RidesRoute);
 router.use("/notification", NotificationRoutes);
 router.use("/tickets", TicketsRoutes);
 router.use("/reviews", ReviewRoutes);
+router.use("/messages",MessageRoutes );
+
 
 
 export default router;
