@@ -15,7 +15,13 @@ export async function registerController(req, res) {
 
   try {
     const user = await AuthServices.register({ phone, password, role });
+  await NotificationService.createNotification({
+  title: "Welcome!",
+  message: "Your account has been successfully created. Enjoy our services!",
+  user_id: user.id,
+});
     res.status(201).json({ success: true, user });
+  
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
@@ -32,11 +38,7 @@ export const loginController = async (req, res) => {
     }
 
     const user = await AuthServices.login({ phone, password });
-await NotificationService.createNotification({
-  title: "Welcome!",
-  message: "Your account has been successfully created. Enjoy our services!",
-  user_id: user.id,
-});
+
     return res.status(200).json({
       message: "Login successful",
       user,
