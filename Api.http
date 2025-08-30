@@ -1,10 +1,10 @@
-# @baseUrl = https://transport-backend-7twe.onrender.com/api
+# @baseUrl = https://transport-backend-ks55.onrender.com/api
 @baseUrl = http://localhost:4000/api
 
-@driverId = 314226f9-ebb8-46ed-90ae-7c481d2f0c72
-@userId = 0920dac7-366f-4c81-a8c2-56d478d42fbc
+@driverId = 66409719-057b-4c86-ada1-c252ac608a2c
+@userId = 5e488719-f86e-489a-b2bc-b600dbdfe871
 @ticketId = 4
-@rideId=4817816e-dd03-43a5-8c72-3b1d2d8f8e11
+@rideId=db44fa0b-ec81-430f-90b9-d7e7c0a5aa1a
 
 ###
 POST {{baseUrl}}/auth/register
@@ -125,7 +125,7 @@ Authorization:
   "price": 1500,
   "rideDatetime": "2025-07-01T14:00:00Z",
   "durationDays": 1,
-  "requiredVehicleType": "car"  ,
+  "requiredVehicleType": "bike"  ,
   "time": "14:00:00"
 }
 
@@ -146,7 +146,7 @@ Authorization:
 }
 
 ###
-PUT  {{baseUrl}}/rides/status/{{rideId}}
+PUT  {{baseUrl}}/rides/stauseApitus/{{rideId}}
 Content-Type: application/json
 Authorization:
 
@@ -250,7 +250,14 @@ GET {{baseUrl}}/tickets/{{ticketId}}/messages
 
 
 
+###
+POST {{baseUrl}}/messages/{{rideId}}
+Content-Type: application/json
 
+{
+  "senderId": "{{userId}}",
+  "message": "Hello, I have a question about my ride."
+}
 
 ###
 POST {{baseUrl}}/messages/chatbot

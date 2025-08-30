@@ -5,8 +5,8 @@ import { chatController } from "../controller/chatbot.js";
 
 const router = express.Router();
 
-router.route("/:rideId/messages").post(messageController.sendMessage);
-router.route("/:rideId/messages").get(messageController.getMessages);
+router.route("/:rideId").post(messageController.sendMessage);
+router.route("/:rideId").get(messageController.getMessages);
 
 router.route("/chatbot").post(chatController);
 
