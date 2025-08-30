@@ -1,9 +1,9 @@
-@baseUrl = https://transport-backend-ks55.onrender.com/api
-# @baseUrl = http://localhost:4000/api
+# @baseUrl = https://transport-backend-ks55.onrender.com/api
+@baseUrl = http://localhost:4000/api
 
-@driverId = 4ce2a968-91fe-4822-9fff-404cd066d2a4
-@userId = e8e9ef59-9e95-46f6-9964-1f9bbbfa9eb4
-@rideId=262f6962-f6fc-4f1f-ad9c-5454132de7c2
+@driverId = 66409719-057b-4c86-ada1-c252ac608a2c
+@userId = caa42b74-9506-4cd0-ab36-4327d53bcbea
+@rideId=a6522833-cfb1-4dd6-a8e1-c8e45c3fc0e6
 @ticketId = 4
 
 
@@ -21,7 +21,7 @@ POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-  "phone":"03302619134",
+  "phone":"03302619144",
   "password":"openplz123",
   "role":"user"
 }
@@ -31,7 +31,7 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "phone":"03302319144",
+  "phone":"03302619144",
   "password":"openplz123"
 }
  
@@ -53,7 +53,7 @@ Authorization:
 
 { 
   "id":"{{userId}}",
-  "email": "user@example.com",
+  "email": "test@example.com",
   "img_url": "http://image.url/profile.png",
   "location": {
     "address": "Gulshan, Karachi",
@@ -83,7 +83,7 @@ Authorization:
   "vehicle_number": "ABC-1234",
   "vehicle_model": "Toyota Corolla 2022",
   "license_url": "http://image.url/license.png",
-  "license_number": "DL-987654321",
+  "license_number": "DL-9e8e9ef59-9e95-46f6-9964-1f9bbbfa9eb487654321",
   "license_valid": "2026-12-31",
   "vehicleType": "bike",              
   "vehicleLimit": 4                  
@@ -147,7 +147,7 @@ Authorization:
 }
 
 ###
-PUT  {{baseUrl}}/rides/stauseApitus/{{rideId}}
+PUT  {{baseUrl}}/rides/status/{{rideId}}
 Content-Type: application/json
 Authorization:
 
@@ -271,3 +271,7 @@ Content-Type: application/json
   "role": "user",
   "userMessage": "Hello, I need help with my recent ride booking. answer me in 100 words"
 } 
+
+
+###
+GET {{baseUrl}}/notification/{{userId}}

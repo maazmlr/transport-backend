@@ -31,7 +31,11 @@ export const loginController = async (req, res) => {
     }
 
     const user = await AuthServices.login({ phone, password });
-
+await NotificationService.createNotification({
+  title: "Welcome!",
+  message: "Your account has been successfully created. Enjoy our services!",
+  user_id: user.id,
+});
     return res.status(200).json({
       message: "Login successful",
       user,

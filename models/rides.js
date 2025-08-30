@@ -94,7 +94,7 @@ async findById(rideId) {
   async findRidesForDriver(driverId) {
     const driver = await db("users")
       .select("vehicleType")
-      .where({ id: driverId, role: "driver" })
+      .where({ id: driverId, role: "driver",driver_verification_status:"verified" })
       .first();
 
     if (!driver?.vehicleType) return [];

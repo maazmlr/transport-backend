@@ -1,9 +1,16 @@
 // controllers/ticketController.js
+import { NotificationService } from "../services/notification.js";
 import * as TicketService from "../services/tickets.js";
 
 export const createTicket = async (req, res) => {
   const { title, description, priority,userId } = req.body;
   const ticket = await TicketService.createTicket(title, description, priority,userId);
+  await NotificationService.createNotification({
+      title: "New Ticket Created",
+      message: `Your ticket "${title}" has been successfully created.`,
+      user_id: userId,
+    });
+
   res.json(ticket);
 };
 
@@ -29,6 +36,12 @@ export const updateTicketStatus = async (req, res) => {
     if (!ticket) {
       return res.status(404).json({ message: "Ticket not found" });
     }
+        await NotificationService.createNotification({
+      title: "Ticket Status Updated",
+      message: `Your ticket "${ticket.title}" status has been updated to "${status}".`,
+      user_id: ticket.user_id, // assuming ticket has user_id
+    });
+
     res.json(ticket);
   } catch (error) {
     res.status(400).json({ error: error.message });

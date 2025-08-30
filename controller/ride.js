@@ -1,3 +1,4 @@
+import { NotificationService } from "../services/notification.js";
 import { RideService } from "../services/ride.js";
 import db from "../src/db.js";
 
@@ -40,7 +41,12 @@ export const createRideController = async (req, res) => {
       requiredVehicleType,
       time, // pass time
     });
-
+ const notificationMessage = `Your ride from ${pickup.address} to ${destination.address} has been created successfully.`;
+    await NotificationService.createNotification({
+      title: 'Ride Created',
+      message: notificationMessage,
+      user_id: userId,
+    });
     res.status(201).json({ message: "Ride created", ride });
   } catch (err) {
     console.error("createRideController error:", err);
@@ -89,6 +95,20 @@ export const acceptRideController = async (req, res) => {
         .status(404)
         .json({ message: "Ride not found or already accepted" });
     }
+const riderNotification = NotificationService.createNotification({
+  title: "Ride Accepted",
+  message: `You have successfully accepted the ride from ${updatedRide.pickup.address} to ${updatedRide.destination.address}.`,
+  user_id: updatedRide.driver_id, // driver
+});
+
+const userNotification = NotificationService.createNotification({
+  title: "Driver Assigned",
+  message: `Your ride from ${updatedRide.pickup.address} to ${updatedRide.destination.address} has been accepted by a driver.`,
+  user_id: updatedRide.user_id, // ride owner
+});
+
+// Fire both notifications in parallel
+await Promise.all([riderNotification, userNotification]);
 
     return res.status(200).json({
       message: "Ride accepted successfully",
@@ -172,6 +192,23 @@ export const changeRideStatusController = async (req, res) => {
       rideId,
       newStatus.trim()
     );
+
+        if (newStatus.trim() === "completed") {
+      const riderNotification = NotificationService.createNotification({
+        title: "Ride Completed",
+        message: `You have completed the ride from ${updatedRide.pickup.address} to ${updatedRide.destination.address}.`,
+        user_id: updatedRide.driver_id,
+      });
+
+      const userNotification = NotificationService.createNotification({
+        title: "Ride Completed",
+        message: `Your ride from ${updatedRide.pickup.address} to ${updatedRide.destination.address} has been completed successfully.`,
+        user_id: updatedRide.user_id,
+      });
+
+      await Promise.all([riderNotification, userNotification]);
+    }
+
 
     return res.status(200).json({
       message: "Ride status updated successfully",
