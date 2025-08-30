@@ -17,7 +17,7 @@ export async function chatController(req, res) {
 
     const reply = await getChatResponse(messages);
 
-    res.json({ reply });
+    res.json({ botMessage: reply });
   } catch (err) {
     console.error("Chat error:", err);
     res.status(500).json({ error: "Failed to get chat response" });
