@@ -1,4 +1,5 @@
 import { AuthServices } from "../services/auth.js";
+import { NotificationService } from "../services/notification.js";
 
 export async function registerController(req, res) {
   const { phone, password, role = "user" } = req.body;
