@@ -1,10 +1,11 @@
-# @baseUrl = https://transport-backend-ks55.onrender.com/api
-@baseUrl = http://localhost:4000/api
+@baseUrl = https://transport-backend-ks55.onrender.com/api
+# @baseUrl = http://localhost:4000/api
 
-@driverId = 66409719-057b-4c86-ada1-c252ac608a2c
-@userId = 5e488719-f86e-489a-b2bc-b600dbdfe871
+@driverId = 4ce2a968-91fe-4822-9fff-404cd066d2a4
+@userId = e8e9ef59-9e95-46f6-9964-1f9bbbfa9eb4
+@rideId=262f6962-f6fc-4f1f-ad9c-5454132de7c2
 @ticketId = 4
-@rideId=db44fa0b-ec81-430f-90b9-d7e7c0a5aa1a
+
 
 ###
 POST {{baseUrl}}/auth/register
@@ -255,9 +256,12 @@ POST {{baseUrl}}/messages/{{rideId}}
 Content-Type: application/json
 
 {
-  "senderId": "{{userId}}",
-  "message": "Hello, I have a question about my ride."
+  "senderId": "{{driverId}}",
+  "message": "yesh, I have a question about my ride."
 }
+
+###
+GET {{baseUrl}}/messages/{{rideId}}
 
 ###
 POST {{baseUrl}}/messages/chatbot
@@ -266,4 +270,4 @@ Content-Type: application/json
 {
   "role": "user",
   "userMessage": "Hello, I need help with my recent ride booking. answer me in 100 words"
-}
+} 
