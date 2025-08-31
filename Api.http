@@ -1,9 +1,9 @@
 # @baseUrl = https://transport-backend-ks55.onrender.com/api
 @baseUrl = http://localhost:4000/api
 
-@driverId = 66409719-057b-4c86-ada1-c252ac608a2c
-@userId = caa42b74-9506-4cd0-ab36-4327d53bcbea
-@rideId=a6522833-cfb1-4dd6-a8e1-c8e45c3fc0e6
+@driverId = d2d2e694-dc2a-44b9-8fec-2041c8966d88
+@userId = 0481abfd-a912-41aa-bf5e-7aa8d10c05ff
+@rideId=3381aec0-e435-478b-9fad-65559ca7fcac
 @ticketId = 4
 
 
@@ -71,7 +71,7 @@ Authorization:
 
 {
   "id": "{{driverId}}",
-  "email": "maaz@example.com",
+  "email": "dmaaz@example.com",
   "img_url": "http://image.url/profile.png",
   "location": {
     "address": "Gulshan, Karachi",
@@ -269,7 +269,7 @@ Content-Type: application/json
 
 {
   "role": "user",
-  "userMessage": "Hello, I need help with my recent ride booking. answer me in 100 words"
+  "userMessage":"I want to book a ride to Clifton at 6pm."
 } 
 
 

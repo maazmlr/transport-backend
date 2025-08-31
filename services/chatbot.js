@@ -1,25 +1,20 @@
 // src/services/chatService.js
-import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
-import { AzureKeyCredential } from "@azure/core-auth";
+import OpenAI from "openai";
 
-const token = process.env.TOKEN;
-const endpoint = "https://models.github.ai/inference";
-const model = "openai/gpt-4o-mini"; // supported model
-
-// Initialize client once
-const client = ModelClient(endpoint, new AzureKeyCredential(token));
+const openai = new OpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
+  apiKey: process.env.TOKEN,
+  defaultHeaders: {
+    "HTTP-Referer": "https://yourdomain.com", // optional
+    "X-Title": "Your App", // optional
+  },
+});
 
 export async function getChatResponse(messages) {
-  const response = await client.path("/chat/completions").post({
-    body: {
-      model,
-      messages,
-    },
+  const response = await openai.chat.completions.create({
+    model: "deepseek/deepseek-chat-v3.1:free", // or another provider’s model
+    messages,
   });
 
-  if (isUnexpected(response)) {
-    throw new Error(response.body.error.message || "Unexpected error");
-  }
-
-  return response.body.choices[0].message.content;
+  return response.choices[0].message.content;
 }
