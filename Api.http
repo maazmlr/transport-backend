@@ -269,7 +269,7 @@ Content-Type: application/json
 
 {
   "role": "user",
-  "userMessage":"I want to book a ride to Clifton at 6pm."
+  "userMessage":"I just signup how much time it will take a ride to assign me ? ."
 } 
 
 
